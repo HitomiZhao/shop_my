@@ -1,0 +1,46 @@
+<el-container>
+  <el-header>
+    <el-row>
+      <el-col :span="8"
+        ><img src="../../assets/images/logo.png" alt=""
+      /></el-col>
+      <el-col :span="8">
+        <h1>后台电商管理系统</h1>
+      </el-col>
+      <el-col class="col" :span="8">
+        欢迎来到情歌俱乐部 <a href="#" @click.prevent="logout">退出</a>
+      </el-col>
+    </el-row>
+  </el-header>
+  <el-container>
+    <el-aside width="200px">
+      <el-menu
+        :default-active="$route.path"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        :router="true"
+      >
+        <el-submenu
+          :index="item1.id+''"
+          v-for="item1 in menusList"
+          :key="item1.id"
+        >
+          <template slot="title">
+            <i class="el-icon-location"></i>
+            <span>{{ item1.authName }}</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item
+              :index="'/'+ item2.path"
+              v-for="item2 in item1.children"
+              :key="item2.id"
+              >{{ item2.authName }}</el-menu-item
+            >
+          </el-menu-item-group>
+        </el-submenu>
+      </el-menu>
+    </el-aside>
+    <el-main><router-view></router-view></el-main>
+  </el-container>
+</el-container>
